@@ -12,6 +12,12 @@ app.use(express.urlencoded({ extended: false }));
 
 const port = 9001;
 
+
+app.get("/", (req, res) => {
+    res.redirect(301, "/pizza/list")
+});
+
+
 app.get("/pizza/list", (req, res) => {
     res.sendFile(path.join(`${__dirname}/../frontend/index.html`));
 });
@@ -28,6 +34,6 @@ app.get("/api/allergen", async (req, res) => {
     res.send(JSON.stringify(allergensJSON.allergens));
 })
 
+app.use('/public/' , express.static(`${__dirname}/../frontend/public`));
 
-
-app.listen(port, () => console.log(`http://127.0.0.1:${port}/pizza/list`));
+app.listen(port, () => console.log(`http://127.0.0.1:${port}`));
