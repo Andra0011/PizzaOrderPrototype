@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 
 const port = 9001;
 
-app.get("/", (req, res) => {
+app.get("/pizza/list", (req, res) => {
     res.sendFile(path.join(`${__dirname}/../frontend/index.html`));
 });
 
@@ -30,4 +30,4 @@ app.get("/api/allergen", async (req, res) => {
 
 
 
-app.listen(port, () => console.log(`http://127.0.0.1:${port}`));
+app.listen(port, () => console.log(`http://127.0.0.1:${port}/pizza/list`));
