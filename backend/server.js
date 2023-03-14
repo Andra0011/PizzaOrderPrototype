@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const port = 9001;
-
+const orders = [];
 
 app.get("/", (req, res) => {
     res.redirect(301, "/pizza/list")
@@ -34,6 +34,18 @@ app.get("/api/allergen", async (req, res) => {
     res.send(JSON.stringify(allergensJSON.allergens));
 })
 
-app.use('/public/' , express.static(`${__dirname}/../frontend/public`));
+app.get("/api/order", async (req, res) => {
+    res.json(orders);
+})
+
+app.post("/api/order", async (req, res) => {
+    const body = req.body;
+    body.id = orders.length + 1;
+    orders.push(body);
+    res.json(body);
+})
+
+
+app.use('/public/', express.static(`${__dirname}/../frontend/public`));
 
 app.listen(port, () => console.log(`http://127.0.0.1:${port}`));
