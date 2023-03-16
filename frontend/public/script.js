@@ -109,6 +109,14 @@ const loadAPI = async () => {
   addEl("div", root, "class", "allergens")
   addEl("div", root, "id", "pizzaJSON")
 
+  pizzaJSON.forEach(pizza => {
+    const allPizzaDiv = document.getElementById("pizzaJSON")
+    allPizzaDiv.insertAdjacentHTML("beforeend", `<div id="Pizza${pizza.id}" class="pizza ${allergenIdToDivClasses(pizza.allergens)}">${pizza.name} : </div>`)
+    const thatPizza = document.getElementById(`Pizza${pizza.id}`)
+    thatPizza.insertAdjacentHTML("beforeend", `<div id="allergenList${pizza.id}">${allergenIdToName(pizza.allergens)}<br/><br/></div>`)
+  });
+
+
   const filterBtn = document.querySelector(".filter")
   const allPizzaDiv = document.getElementById("pizzaJSON")
   const allAllergens = document.querySelector(".allergens")
