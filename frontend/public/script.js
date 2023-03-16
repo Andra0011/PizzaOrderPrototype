@@ -63,7 +63,7 @@ let allAllergens
 let pizzaJSON, allergensJSON
 const loadAPI = async () => {
   addEl("div", root, "class", "allergens")
-   allAllergens = document.querySelector(".allergens")
+  allAllergens = document.querySelector(".allergens")
 
   let pizzaList = await fetch(`http://127.0.0.1:9001/api/pizza`);
   let allergensList = await fetch(`http://127.0.0.1:9001/api/allergen`);
@@ -75,8 +75,7 @@ const loadAPI = async () => {
     const checkbox = document.querySelector(`#${allergen.name}Filter`)
 
     checkbox.addEventListener("change", () => {
-      let checkedArr = [], allergenArr = []
-      const pizzasToFilter = document.querySelectorAll(`.${allergen.name}`)
+      let checkedArr = [];
       const allCheckboxes = document.querySelectorAll(".checkboxx")
       const allPizzas = document.querySelectorAll(".pizza")
       allCheckboxes.forEach(checkboxx => {
@@ -85,33 +84,19 @@ const loadAPI = async () => {
         }
       })
 
-      pizzasToFilter.forEach(pizzaToFilter => {
-        // pizzaJSON.forEach(pizza => {
-        //   const allergenString = document.querySelector(`#allergenList${pizza.id}`)
-        //   if (pizzaToFilter.id == `Pizza${pizza.id}`) {
-        //     allergenArr = allergenString.textContent.split(", ")
-        //   }
-        // })
-        // console.log(allergenArr, checkedArr)
-        allPizzas.forEach(pizza => {
-          pizza.classList.remove('hidden')
-          checkedArr.forEach(checked => {
-            if (pizza.classList.contains(checked)) {
-              pizza.classList.add('hidden');
-            }
-          })
+      allPizzas.forEach(pizza => {
+        pizza.classList.remove('hidden')
+        checkedArr.forEach(checked => {
+          if (pizza.classList.contains(checked)) {
+            pizza.classList.add('hidden');
+          }
         })
-      });
-
+      })
+      
       console.log("end");
     })
   });
 
-
-
-
-
- 
   addEl("div", root, "id", "pizzaJSON")
 
   pizzaJSON.forEach(pizza => {
@@ -134,15 +119,23 @@ const loadAPI = async () => {
     const pizzaPrice = document.querySelector(`#pizzaPrice${pizza.id}`);
     pizzaPrice.textContent=`${pizza.price} RON`
 
-  });
+    const amount = addEl("input", thatPizza, "id", `amount${pizza.id}`);
+    amount.value = "0";
+    
+    const addButton = addEl("button", thatPizza, "data-pizza-id", `${pizza.id}`, "class", "add");
+    addButton.textContent = "Add to order";
+    addButton.addEventListener("click", handleAddToOrder);
 
+    const removeButton = addEl("button", thatPizza, "data-pizza-id", `${pizza.id}`, "class", "remove");
+    removeButton.textContent = "Remove";
+    removeButton.style.display = "none";
+    removeButton.addEventListener("click", handleRemoveFromOrder);
+  });
 
   const filterBtn = document.querySelector(".filter")
   const allPizzaDiv = document.getElementById("pizzaJSON")
   const pizzas = document.querySelector(".pizza")
   console.log(pizzas)
-
-
 
   filterBtn.addEventListener("click", (e) => {
     console.log(allAllergens.style.visibility)
@@ -159,6 +152,9 @@ const loadAPI = async () => {
       allPizzaDiv.style.marginLeft = "300px"
     }
   })
+
+  const orderArea = addEl("div", root, "id", "order");
+  
 }
 
 const loadEvent = () => {
@@ -166,3 +162,33 @@ const loadEvent = () => {
 };
 
 window.addEventListener("load", loadEvent);
+
+let cart = [];
+const handleAddToOrder = (event) => {
+  const pizzaId = event.target.getAttribute("data-pizza-id");
+  const amount = document.getElementById(`amount${pizzaId}`);
+
+  if(amount.value == 0) {
+    return;
+  }
+
+  cart.push({
+    id: pizzaId,
+    amount: amount.value,
+  })
+  console.log(cart);
+
+  event.target.style.display = 'none';
+  document.querySelector(`.remove[data-pizza-id='${pizzaId}']`).style.display = "";
+  amount.disabled = true;
+}
+
+const handleRemoveFromOrder = (event) => {
+  const pizzaId = event.target.getAttribute("data-pizza-id");
+  cart = cart.filter(pizza => pizza.id !== pizzaId);
+  console.log(cart);
+
+  event.target.style.display = 'none';
+  document.querySelector(`.add[data-pizza-id='${pizzaId}']`).style.display = "";
+  document.getElementById(`amount${pizzaId}`).disabled = false;
+}
