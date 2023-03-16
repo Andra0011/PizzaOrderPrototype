@@ -24,13 +24,13 @@ app.get("/pizza/list", (req, res) => {
 
 app.get("/api/pizza", async (req, res) => {
     const pizzasJSON = JSON.parse(await fileReaderAsync(pizzaPath));
-    console.log(pizzasJSON.pizzas)
+    // console.log(pizzasJSON.pizzas)
     res.send(JSON.stringify(pizzasJSON.pizzas));
 })
 
 app.get("/api/allergen", async (req, res) => {
     const allergensJSON = JSON.parse(await fileReaderAsync(allergenPath));
-    console.log(allergensJSON)
+    // console.log(allergensJSON)
     res.send(JSON.stringify(allergensJSON.allergens));
 })
 

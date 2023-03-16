@@ -2,7 +2,7 @@
     "allergens": [
         {
             "id": 1,
-            "name": "Cereals Containing Gluten"
+            "name": "Gluten"
         },
         {
             "id": 2,
@@ -10,7 +10,7 @@
         },
         {
             "id": 3,
-            "name": "Milk/Dairy"
+            "name": "Milk"
         },
         {
             "id": 4,
@@ -18,7 +18,7 @@
         },
         {
             "id": 5,
-            "name": "Crustaceans and molluscs"
+            "name": "Crustaceans"
         },
         {
             "id": 6,
