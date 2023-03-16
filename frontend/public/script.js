@@ -17,6 +17,81 @@ const addEl = (
   return el;
 };
 
+const container = () => {
+  return `<div id = "popupContainer" class="modal">
+  <div id = "formContainer">
+    <form id="formular">
+      <div id="title" class="formItem">
+        Order Details
+      </div>
+      <div class="formItem">
+        <label for="name">Name:</label>
+        <input type="text" id="name" class="input" name="name">
+      </div>
+      <div class="formItem">
+        <label for="email">Email:</label>
+        <input type="text" id="email" class="input" name="email">
+      </div>
+      <div class="formItem">
+        <label for="city">City:</label>
+        <input type="text" id="city" class="input" name="city">
+      </div>
+      <div class="formItem">
+        <label for="street">Street:</label>
+        <input type="text" id="street" class="input" name="street">
+      </div>
+      <div id="errorMessage" ></div>
+      <button id="submitBttn" class="btn btn-success" type="submit" form="formular">Complete Order</button>
+    </form>
+  </div>
+
+</div>`
+}
+
+let subtotal = 0
+const order = () => {
+  return `<div class="modal-dialog orderForm" id = "orderDetailsContainer">
+  <div class="modal-content receipt">
+    <div class="modal-header">
+      <h4 class="modal-title">Order List</h4>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-body text-start text-black p-4">
+      <div id="orderList">
+      </div>
+      <p class="mb-0" style="color: #35558a;">Payment summary</p>
+      <hr class="mt-2 mb-4"
+        style="height: 0; width: 500px; background-color: transparent; opacity: .75; border-top: 2px dashed #9e9e9e;">
+
+      <div class="d-flex justify-content-between">
+        <p class="fw-bold mb-0">Subtotal</p>
+        <p id="subtotal" class="text-muted mb-0">${subtotal} RON</p>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <p class="small mb-0">Delivery</p>
+        <p class="small mb-0">30 RON</p>
+      </div>
+
+      <div class="d-flex justify-content-between pb-1">
+        <p class="small">Tax</p>
+        <p class="small">40 RON</p>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <p class="fw-bold">Total</p>
+        <p id="total" class="fw-bold" style="color: #35558a;">${subtotal + 70} RON</p>
+      </div>
+
+    </div>
+
+    </div>
+
+  </div>
+</div>`
+}
+
 let allergenIdToName = (allergensInPizza) => {
   let namesToRet = "";
   for (let i = 0; i < allergensInPizza.length; i++) {
@@ -61,6 +136,7 @@ let createAllergensCheckers = (allergen) => {
 
 let allAllergens
 let pizzaJSON, allergensJSON
+
 const loadAPI = async () => {
   addEl("div", root, "class", "allergens")
    allAllergens = document.querySelector(".allergens")
@@ -134,6 +210,9 @@ const loadAPI = async () => {
     const pizzaPrice = document.querySelector(`#pizzaPrice${pizza.id}`);
     pizzaPrice.textContent=`${pizza.price} RON`
 
+    let btn = addEl("button", thatPizza, "class", "orderBttn")
+    btn.innerHTML = "Order"
+
   });
 
 
@@ -159,6 +238,26 @@ const loadAPI = async () => {
       allPizzaDiv.style.marginLeft = "300px"
     }
   })
+  root.insertAdjacentHTML("beforeend", `<div class= "popup"></div>`)
+  let popup = document.querySelector(".popup")
+  popup.insertAdjacentHTML("beforeend", container())
+  popup.insertAdjacentHTML("beforeend", order())
+  let orderPopUp = document.querySelector(".orderForm")
+  
+  let cancelBtn = addEl("button", popup, "class", "cancelBtn")
+  cancelBtn.innerHTML = "x"
+  cancelBtn.addEventListener("click", () => {
+    popup.style.visibility = "hidden"
+  })
+
+  document.querySelector(".cart").addEventListener("click", () => {
+    if (popup.style.visibility === "visible"){
+      popup.style.visibility = "hidden"
+    } else {
+      popup.style.visibility = "visible"
+    }
+  })
+
 }
 
 const loadEvent = () => {
