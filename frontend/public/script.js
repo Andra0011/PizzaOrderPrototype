@@ -25,20 +25,20 @@ const formular = () => {
         Order Details
       </div>
       <div class="formItem">
-        <label for="name">Name:</label>
-        <input type="text" id="name" class="input" name="name">
+        <label for="name"></label>
+        <input type="text" id="name" class="input" name="name" placeholder="Name">
       </div>
       <div class="formItem">
-        <label for="email">Email:</label>
-        <input type="text" id="email" class="input" name="email">
+        <label for="email"></label>
+        <input type="text" id="email" class="input" name="email" placeholder="Email">
       </div>
       <div class="formItem">
-        <label for="city">City:</label>
-        <input type="text" id="city" class="input" name="city">
+        <label for="city"></label>
+        <input type="text" id="city" class="input" name="city" placeholder="City">
       </div>
       <div class="formItem">
-        <label for="street">Street:</label>
-        <input type="text" id="street" class="input" name="street">
+        <label for="street"></label>
+        <input type="text" id="street" class="input" name="street" placeholder="Street">
       </div>
       <div id="errorMessage" ></div>
       <button id="submitBttn" class="btn btn-success" type="submit" form="formular">Complete Order</button>
@@ -195,7 +195,7 @@ const loadAPI = async () => {
     const pizzaPrice = document.querySelector(`#pizzaPrice${pizza.id}`);
     pizzaPrice.textContent = `${pizza.price} RON`
 
-    const amount = addEl("input", thatPizza, "id", `amount${pizza.id}`);
+    const amount = addEl("input", thatPizza, "id", `amount${pizza.id}`, "class", "amountInput");
     amount.value = "0";
 
     const addButton = addEl("button", thatPizza, "data-pizza-id", `${pizza.id}`, "class", "add orderBttn");

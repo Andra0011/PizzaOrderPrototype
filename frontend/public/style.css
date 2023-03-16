@@ -197,23 +197,61 @@ label {
 .receipt {
   background-color: white !important;
   border-radius:  5px !important;
-  margin-top: 200px;
-  margin-left: 20px;
+  margin-top: 255px;
+  margin-left: 200px;
 }
 
+#submitBttn {
+ margin-top: 25px;
+ margin-left: 35px;
+}
+
+
 #formContainer {
-  
+  margin-left: 600px;
+  margin-bottom: 200px;
+  /* background-color: rgb(135, 132, 132); */
+  background: linear-gradient(90deg, rgba(227, 59, 59, 1) 0%, rgba(255, 197, 115, 1) 50%, rgba(247, 131, 21, 1) 100%);
+  padding: 60px;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+#title {
+  font-size: 25px;
+  text-align: center;
+}
+
+.formItem {
+  padding: 15px
 }
 
 .orderBttn {
-  background-color: rgb(212, 106, 151);
+  background-color: orangered;
     width: 150px;
     height: 50px;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     border-radius: 30px;
     top: 90%;
     left: 25%;
     cursor: pointer;
+    color: white;
+    margin-left: 400px;
+    }
+
+.cancelBtn {
+  background-color: red;
+  color: white;
+  font-weight: 800;
+  height: auto;
+  width: 35px;
+  font-size: 25px;
+  /* margin-left: 60px;
+  margin-top: 20px; */
+}
+.amountInput {
+  margin-top: 10px;
+  margin-left: 380px;
 }
