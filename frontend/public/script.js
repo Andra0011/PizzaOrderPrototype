@@ -165,7 +165,7 @@ const loadAPI = async () => {
     pizzaPrice.textContent = `${pizza.price} RON`
 
     const amount = addEl("input", thatPizza, "id", `amount${pizza.id}`);
-    amount.value = "1";
+    amount.placeholder = "0";
 
     const addButton = addEl("button", thatPizza, "data-pizza-id", `${pizza.id}`, "class", "add orderBttn");
     addButton.textContent = "Add to order";
@@ -234,13 +234,13 @@ const handleAddToOrder = (event) => {
   const pizzaId = event.target.getAttribute("data-pizza-id");
   const amount = document.getElementById(`amount${pizzaId}`);
 
-  if (amount.value < 1) {
+  if (Math.floor(amount.value) <= 0) {
     return;
   }
 
   cart.push({
     id: pizzaId,
-    amount: amount.value,
+    amount: Math.floor(amount.value),
   })
 
   event.target.style.display = 'none';
@@ -260,7 +260,7 @@ const handleRemoveFromOrder = (event) => {
   document.querySelector(`.add[data-pizza-id='${pizzaId}']`).style.display = "";
   const amount = document.getElementById(`amount${pizzaId}`)
   amount.disabled = false;
-  amount.value = "1";
+  amount.value = "";
 
   const sumaryArea = document.querySelector("#orderDetailsContainer .modal-body")
   sumaryArea.innerHTML = "";
