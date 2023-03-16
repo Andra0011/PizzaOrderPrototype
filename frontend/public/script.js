@@ -49,17 +49,22 @@ let createAllergensCheckers = (allergen) => {
 
   const label = document.createElement("label");
   label.for = `${allergen.name}Filter`;
-  label.textContent = `${allergen.name}`;
-
-  root.appendChild(checkbox);
-  root.appendChild(label);
+  label.className = "allergen"
+  // label.textContent = `${allergen.name}`;
+  
+  allAllergens.appendChild(label);
+  label.appendChild(checkbox);
+  label.innerHTML+=`${allergen.name}`
 
 }
 
 
-
+let allAllergens
 let pizzaJSON, allergensJSON
 const loadAPI = async () => {
+  addEl("div", root, "class", "allergens")
+   allAllergens = document.querySelector(".allergens")
+
   let pizzaList = await fetch(`http://127.0.0.1:9001/api/pizza`);
   let allergensList = await fetch(`http://127.0.0.1:9001/api/allergen`);
   pizzaJSON = await pizzaList.json();
@@ -106,32 +111,23 @@ const loadAPI = async () => {
 
 
 
-  addEl("div", root, "class", "allergens")
+ 
   addEl("div", root, "id", "pizzaJSON")
 
   pizzaJSON.forEach(pizza => {
     const allPizzaDiv = document.getElementById("pizzaJSON")
     allPizzaDiv.insertAdjacentHTML("beforeend", `<div id="Pizza${pizza.id}" class="pizza ${allergenIdToDivClasses(pizza.allergens)}">${pizza.name} : </div>`)
     const thatPizza = document.getElementById(`Pizza${pizza.id}`)
-    thatPizza.insertAdjacentHTML("beforeend", `<div id="allergenList${pizza.id}">${allergenIdToName(pizza.allergens)}<br/><br/></div>`)
+    thatPizza.insertAdjacentHTML("beforeend", `<div id="allergenList${pizza.id}">${allergenIdToName(pizza.allergens)}</div>`)
   });
 
 
   const filterBtn = document.querySelector(".filter")
   const allPizzaDiv = document.getElementById("pizzaJSON")
-  const allAllergens = document.querySelector(".allergens")
-  allPizzaDiv.insertAdjacentHTML("beforeend", `<div id= "pizza">
-  <p id="pizzaName">${pizzaJSON[0].name}</p>
-  <p id="pizzaDetails">Detalii Pizza</p>
-  <p id="pizzaPrice">35,00 lei</p>
-  </div>`)
-  const pizzas = document.querySelector("#pizza")
+  const pizzas = document.querySelector(".pizza")
   console.log(pizzas)
-  allAllergens.insertAdjacentHTML("beforeend", `<div id="allergen">${allergensJSON[0].name}</div> 
-  <label class="container">
-  <input checked="checked" type="checkbox">
-  <div class="checkmark"></div>
-</label> `)
+
+
 
   filterBtn.addEventListener("click", (e) => {
     console.log(allAllergens.style.visibility)
@@ -139,14 +135,13 @@ const loadAPI = async () => {
       allAllergens.style.transition = "height 0s"
       allAllergens.style.visibility = "hidden"
       allAllergens.style.height = "5vh"
-      pizzas.style.marginLeft = "200px"
-
+      allPizzaDiv.style.marginLeft = "50px"
 
     } else {
       allAllergens.style.transition = "height 3s"
       allAllergens.style.visibility = "visible"
       allAllergens.style.height = "100vh"
-      pizzas.style.marginLeft = "400px"
+      allPizzaDiv.style.marginLeft = "300px"
     }
   })
 }
