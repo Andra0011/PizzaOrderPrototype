@@ -3,6 +3,7 @@
         {
             "id": 1,
             "name": "Pizza Prosciutto e Funghi",
+            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-prosciutto-e-funghi.jpg",
             "ingredients": [
                 "mozzarella",
                 "tomato sauce",
@@ -20,6 +21,7 @@
         {
             "id": 2,
             "name": "Pizza Margherita",
+            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-margherita.jpg",
             "ingredients": [
                 "tomato sauce",
                 "mozzarella",
@@ -34,6 +36,7 @@
         {
             "id": 3,
             "name": "Pizza Diavola",
+            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-diavola.jpg",
             "ingredients": [
                 "mozzarella",
                 "tomato sauce",
@@ -49,6 +52,7 @@
         {
             "id": 4,
             "name": "Pizza Capriciosa",
+            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-capriciosa.jpg",
             "ingredients": [
                 "mozzarella",
                 "tomato sauce",
@@ -69,6 +73,7 @@
         {
             "id": 5,
             "name": "Pizza Quattro Stagioni",
+            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-quattro-stagioni.jpg",
             "ingredients": [
                 "mozzarella",
                 "tomato sauce",
@@ -88,6 +93,7 @@
         {
             "id": 6,
             "name": "Pizza Quattro Formaggi",
+            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-quattro-stagioni.jpg",
             "ingredients": [
                 "mozzarella",
                 "smoked cheese",
@@ -103,6 +109,7 @@
         {
             "id": 7,
             "name": "Pizza Campagnola",
+            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-campagnola.jpg",
             "ingredients": [
                 "mozzarella",
                 "tomato sauce",
@@ -123,6 +130,7 @@
         {
             "id": 8,
             "name": "Pizza Carnivora",
+            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-carnivora.jpg",
             "ingredients": [
                 "mozzarella",
                 "tomato sauce",

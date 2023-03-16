@@ -86,13 +86,13 @@ const loadAPI = async () => {
       })
 
       pizzasToFilter.forEach(pizzaToFilter => {
-        pizzaJSON.forEach(pizza => {
-          const allergenString = document.querySelector(`#allergenList${pizza.id}`)
-          if (pizzaToFilter.id == `Pizza${pizza.id}`) {
-            allergenArr = allergenString.textContent.split(", ")
-          }
-        })
-        console.log(allergenArr, checkedArr)
+        // pizzaJSON.forEach(pizza => {
+        //   const allergenString = document.querySelector(`#allergenList${pizza.id}`)
+        //   if (pizzaToFilter.id == `Pizza${pizza.id}`) {
+        //     allergenArr = allergenString.textContent.split(", ")
+        //   }
+        // })
+        // console.log(allergenArr, checkedArr)
         allPizzas.forEach(pizza => {
           pizza.classList.remove('hidden')
           checkedArr.forEach(checked => {
@@ -115,10 +115,25 @@ const loadAPI = async () => {
   addEl("div", root, "id", "pizzaJSON")
 
   pizzaJSON.forEach(pizza => {
-    const allPizzaDiv = document.getElementById("pizzaJSON")
-    allPizzaDiv.insertAdjacentHTML("beforeend", `<div id="Pizza${pizza.id}" class="pizza ${allergenIdToDivClasses(pizza.allergens)}">${pizza.name} : </div>`)
-    const thatPizza = document.getElementById(`Pizza${pizza.id}`)
-    thatPizza.insertAdjacentHTML("beforeend", `<div id="allergenList${pizza.id}">${allergenIdToName(pizza.allergens)}</div>`)
+    const allPizzaDiv = document.querySelector("#pizzaJSON")
+
+    addEl("div", allPizzaDiv, "id", `Pizza${pizza.id}`, "class", `pizza ${allergenIdToDivClasses(pizza.allergens)}`)
+    const thatPizza = document.querySelector(`#Pizza${pizza.id}`)
+
+    addEl("img", thatPizza, "src", `${pizza.image}`)
+
+    addEl("div", thatPizza, "id", `pizzaName${pizza.id}`, "class", "pizzaName");
+    const pizzaName = document.querySelector(`#pizzaName${pizza.id}`);
+    pizzaName.textContent=`${pizza.name}`
+
+    addEl("div", thatPizza, "id", `pizzaIngredients${pizza.id}`, "class", "pizzaIngredients");
+    const pizzaIngredients = document.querySelector(`#pizzaIngredients${pizza.id}`);
+    pizzaIngredients.textContent=`${pizza.ingredients.join(", ")}`
+
+    addEl("div", thatPizza, "id", `pizzaPrice${pizza.id}`, "class", "pizzaPrice");
+    const pizzaPrice = document.querySelector(`#pizzaPrice${pizza.id}`);
+    pizzaPrice.textContent=`${pizza.price} RON`
+
   });
 
 

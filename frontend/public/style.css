@@ -12,48 +12,51 @@ body {
 
 .pizza {
   padding: 20px;
-  width: 400px;
-  height: 300px;
+  width: 600px;
+  height: 350px;
   /* border-radius: 25px; */
   border: 2px solid gray;
   box-shadow: 5px 10px 18px rgb(85, 84, 84);
   margin-left: 100px;
   background-color: white;
   margin-block: 20px;
-  /* text-align: right;
-  text-align-last: center; */
 }
 
-#pizzaName {
-  text-align: center;
+/* .pizza {
+  width: 500px;
+  height: 300px;
+} */
+
+.pizzaName {
   color: orangered;
+  margin-left: 200px;
+  font-size: 30px;
+  font-family: Oswald, sans-serif;
+  font-weight: bold;
 }
 
-#pizzaDetails {
-  padding-left: 200px;
-  text-align-last: left;
+.pizzaIngredients {
+  margin-left: 200px;
+  margin-top: 25px;
+  font-family: Oswald, sans-serif ;
+  font-weight: 1000;
+  font-size: 21px;
 }
 
-#pizzaPrice {
+.pizzaPrice {
   text-align: right;
   color: orangered;
+  margin-top: 30px;
+  font-family: Oswald, sans-serif ;
+  font-size: 25px;
+  font-weight: 550;
 }
 
-.btn {
-  margin-top: 12px;
-  margin-right: 5px;
-
-}
-
-.container .checkmark:after {
-  left: 0.45em;
-  top: 0.25em;
-  width: 0.25em;
-  height: 12px;
-  border: solid white;
-  border-width: 0 0.15em 0.15em 0;
-  transform: rotate(45deg);
-  transition: all 500ms ease-in-out;
+img {
+  float: left;
+  width: auto;
+  padding: 5px;
+  height: 200px;
 }
 
 .searchBar {
@@ -62,7 +65,8 @@ body {
   background: linear-gradient(90deg, rgba(227, 59, 59, 1) 0%, rgba(255, 197, 115, 1) 50%, rgba(247, 131, 21, 1) 100%);
   margin-top: 0;
   height: 70px;
-  width: 100%
+  width: 100%;
+  border-radius: 5px 5px 0 0 ;
 }
 
 
@@ -87,14 +91,11 @@ body {
   font-size: 22px;
   font-family: "Helvetica Neue", "Arial", sans-serif;
   color: white;
+  border-radius: 0 5px 0 5px;
 
   /* text-orientation: upright; */
-
 }
 
-/* .allergens:hover{
-  height: 100vh;
-} */
 @keyframes hover {
   from {
     height: 5vh;
@@ -161,4 +162,10 @@ label {
 .filter:disabled {
   cursor: auto;
   color: grey;
+}
+.btn-outline-danger {
+    box-shadow: 0 0.4rem #dfd9d9;
+    margin-top: 5px;
+    width: 100px;
+    margin-right: 10px;
 }
