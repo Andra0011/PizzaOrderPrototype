@@ -17,7 +17,7 @@ const addEl = (
   return el;
 };
 
-const container = () => {
+const formular = () => {
   return `<div id = "popupContainer" class="modal">
   <div id = "formContainer">
     <form id="formular">
@@ -49,7 +49,7 @@ const container = () => {
 }
 
 let subtotal = 0
-const order = () => {
+const sumary = () => {
   return `<div class="modal-dialog orderForm" id = "orderDetailsContainer">
   <div class="modal-content receipt">
     <div class="modal-header">
@@ -126,10 +126,10 @@ let createAllergensCheckers = (allergen) => {
   label.for = `${allergen.name}Filter`;
   label.className = "allergen"
   // label.textContent = `${allergen.name}`;
-  
+
   allAllergens.appendChild(label);
   label.appendChild(checkbox);
-  label.innerHTML+=`${allergen.name}`
+  label.innerHTML += `${allergen.name}`
 
 }
 
@@ -139,7 +139,7 @@ let pizzaJSON, allergensJSON
 
 const loadAPI = async () => {
   addEl("div", root, "class", "allergens")
-   allAllergens = document.querySelector(".allergens")
+  allAllergens = document.querySelector(".allergens")
 
   let pizzaList = await fetch(`http://127.0.0.1:9001/api/pizza`);
   let allergensList = await fetch(`http://127.0.0.1:9001/api/allergen`);
@@ -151,8 +151,7 @@ const loadAPI = async () => {
     const checkbox = document.querySelector(`#${allergen.name}Filter`)
 
     checkbox.addEventListener("change", () => {
-      let checkedArr = [], allergenArr = []
-      const pizzasToFilter = document.querySelectorAll(`.${allergen.name}`)
+      let checkedArr = [];
       const allCheckboxes = document.querySelectorAll(".checkboxx")
       const allPizzas = document.querySelectorAll(".pizza")
       allCheckboxes.forEach(checkboxx => {
@@ -161,33 +160,19 @@ const loadAPI = async () => {
         }
       })
 
-      pizzasToFilter.forEach(pizzaToFilter => {
-        // pizzaJSON.forEach(pizza => {
-        //   const allergenString = document.querySelector(`#allergenList${pizza.id}`)
-        //   if (pizzaToFilter.id == `Pizza${pizza.id}`) {
-        //     allergenArr = allergenString.textContent.split(", ")
-        //   }
-        // })
-        // console.log(allergenArr, checkedArr)
-        allPizzas.forEach(pizza => {
-          pizza.classList.remove('hidden')
-          checkedArr.forEach(checked => {
-            if (pizza.classList.contains(checked)) {
-              pizza.classList.add('hidden');
-            }
-          })
+      allPizzas.forEach(pizza => {
+        pizza.classList.remove('hidden')
+        checkedArr.forEach(checked => {
+          if (pizza.classList.contains(checked)) {
+            pizza.classList.add('hidden');
+          }
         })
-      });
+      })
 
       console.log("end");
     })
   });
 
-
-
-
-
- 
   addEl("div", root, "id", "pizzaJSON")
 
   pizzaJSON.forEach(pizza => {
@@ -200,32 +185,37 @@ const loadAPI = async () => {
 
     addEl("div", thatPizza, "id", `pizzaName${pizza.id}`, "class", "pizzaName");
     const pizzaName = document.querySelector(`#pizzaName${pizza.id}`);
-    pizzaName.textContent=`${pizza.name}`
+    pizzaName.textContent = `${pizza.name}`
 
     addEl("div", thatPizza, "id", `pizzaIngredients${pizza.id}`, "class", "pizzaIngredients");
     const pizzaIngredients = document.querySelector(`#pizzaIngredients${pizza.id}`);
-    pizzaIngredients.textContent=`${pizza.ingredients.join(", ")}`
+    pizzaIngredients.textContent = `${pizza.ingredients.join(", ")}`
 
     addEl("div", thatPizza, "id", `pizzaPrice${pizza.id}`, "class", "pizzaPrice");
     const pizzaPrice = document.querySelector(`#pizzaPrice${pizza.id}`);
-    pizzaPrice.textContent=`${pizza.price} RON`
+    pizzaPrice.textContent = `${pizza.price} RON`
 
-    let btn = addEl("button", thatPizza, "class", "orderBttn")
-    btn.innerHTML = "Order"
+    const amount = addEl("input", thatPizza, "id", `amount${pizza.id}`);
+    amount.value = "0";
 
+    const addButton = addEl("button", thatPizza, "data-pizza-id", `${pizza.id}`, "class", "add orderBttn");
+    addButton.textContent = "Add to order";
+    addButton.addEventListener("click", handleAddToOrder);
+
+    const removeButton = addEl("button", thatPizza, "data-pizza-id", `${pizza.id}`, "class", "remove orderBttn");
+    removeButton.textContent = "Remove";
+    removeButton.style.display = "none";
+    removeButton.addEventListener("click", handleRemoveFromOrder);
   });
-
 
   const filterBtn = document.querySelector(".filter")
   const allPizzaDiv = document.getElementById("pizzaJSON")
   const pizzas = document.querySelector(".pizza")
   console.log(pizzas)
 
-
-
   filterBtn.addEventListener("click", (e) => {
     console.log(allAllergens.style.visibility)
-    if(allAllergens.style.visibility == "visible"){
+    if (allAllergens.style.visibility == "visible") {
       allAllergens.style.transition = "height 0s"
       allAllergens.style.visibility = "hidden"
       allAllergens.style.height = "5vh"
@@ -240,10 +230,10 @@ const loadAPI = async () => {
   })
   root.insertAdjacentHTML("beforeend", `<div class= "popup"></div>`)
   let popup = document.querySelector(".popup")
-  popup.insertAdjacentHTML("beforeend", container())
-  popup.insertAdjacentHTML("beforeend", order())
+  popup.insertAdjacentHTML("beforeend", formular())
+  popup.insertAdjacentHTML("beforeend", sumary())
   let orderPopUp = document.querySelector(".orderForm")
-  
+
   let cancelBtn = addEl("button", popup, "class", "cancelBtn")
   cancelBtn.innerHTML = "x"
   cancelBtn.addEventListener("click", () => {
@@ -251,12 +241,17 @@ const loadAPI = async () => {
   })
 
   document.querySelector(".cart").addEventListener("click", () => {
-    if (popup.style.visibility === "visible"){
+    if (cart.length === 0)
+      return;
+    if (popup.style.visibility === "visible") {
       popup.style.visibility = "hidden"
     } else {
       popup.style.visibility = "visible"
     }
   })
+
+  const form = document.getElementById("formular");
+  form.addEventListener("submit", submitOrder);
 
 }
 
@@ -265,3 +260,78 @@ const loadEvent = () => {
 };
 
 window.addEventListener("load", loadEvent);
+
+let cart = [];
+const handleAddToOrder = (event) => {
+  const pizzaId = event.target.getAttribute("data-pizza-id");
+  const amount = document.getElementById(`amount${pizzaId}`);
+
+  if (amount.value == 0) {
+    return;
+  }
+
+  cart.push({
+    id: pizzaId,
+    amount: amount.value,
+  })
+  console.log(cart);
+
+  event.target.style.display = 'none';
+  document.querySelector(`.remove[data-pizza-id='${pizzaId}']`).style.display = "";
+  amount.disabled = true;
+}
+
+const handleRemoveFromOrder = (event) => {
+  const pizzaId = event.target.getAttribute("data-pizza-id");
+  cart = cart.filter(pizza => pizza.id !== pizzaId);
+  console.log(cart);
+
+  event.target.style.display = 'none';
+  document.querySelector(`.add[data-pizza-id='${pizzaId}']`).style.display = "";
+  document.getElementById(`amount${pizzaId}`).disabled = false;
+}
+
+const submitOrder = (event) => {
+  // Get values
+  const name = document.getElementById("name");
+  const email = document.getElementById("email");
+  const city = document.getElementById("city");
+  const street = document.getElementById("street");
+
+  if (name.value === '' || email.value === '' || city.value === '' || street.value === '') {
+    event.preventDefault();
+    return false;
+  }
+
+  const dateNow = new Date();
+
+  const order = {
+    pizzas: cart,
+    date: {
+      year: dateNow.getFullYear(),
+      month: dateNow.getMonth(),
+      day: dateNow.getDay(),
+      hour: dateNow.getHours(),
+      minute: dateNow.getMinutes(),
+    },
+    customer: {
+      name: name.value,
+      email: email.value,
+      address: {
+        city: city.value,
+        street: street.value,
+      }
+    }
+  }
+
+  fetch("/api/order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(order)
+  });
+
+  event.preventDefault();
+  location.reload();
+}

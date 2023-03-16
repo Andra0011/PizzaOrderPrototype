@@ -197,7 +197,12 @@ label {
 .receipt {
   background-color: white !important;
   border-radius:  5px !important;
-  margin-top: 600px;
+  margin-top: 200px;
+  margin-left: 20px;
+}
+
+#formContainer {
+  
 }
 
 .orderBttn {
