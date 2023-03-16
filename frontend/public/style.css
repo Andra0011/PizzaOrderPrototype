@@ -169,3 +169,46 @@ label {
     width: 100px;
     margin-right: 10px;
 }
+.orderForm {
+  /* visibility: hidden; */
+  position: fixed !important;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+}
+#popupContainer{
+  position: fixed !important;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  margin-left: 600px;
+}
+.popup {
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.675);
+  width: 100vw;
+  height: 100vh;
+  position: fixed !important;
+  top: 0;
+}
+.receipt {
+  background-color: white !important;
+  border-radius:  5px !important;
+  margin-top: 600px;
+}
+
+.orderBttn {
+  background-color: rgb(212, 106, 151);
+    width: 150px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    top: 90%;
+    left: 25%;
+    cursor: pointer;
+}
