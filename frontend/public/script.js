@@ -104,16 +104,43 @@ const loadAPI = async () => {
 
 
 
+
+
+  addEl("div", root, "class", "allergens")
   addEl("div", root, "id", "pizzaJSON")
-  pizzaJSON.forEach(pizza => {
-    const allPizzaDiv = document.getElementById("pizzaJSON")
-    allPizzaDiv.insertAdjacentHTML("beforeend", `<div id="Pizza${pizza.id}" class="pizza ${allergenIdToDivClasses(pizza.allergens)}">${pizza.name} : </div>`)
-    const thatPizza = document.getElementById(`Pizza${pizza.id}`)
-    thatPizza.insertAdjacentHTML("beforeend", `<div id="allergenList${pizza.id}">${allergenIdToName(pizza.allergens)}<br/><br/></div>`)
-  });
+
+  const filterBtn = document.querySelector(".filter")
+  const allPizzaDiv = document.getElementById("pizzaJSON")
+  const allAllergens = document.querySelector(".allergens")
+  allPizzaDiv.insertAdjacentHTML("beforeend", `<div id= "pizza">
+  <p id="pizzaName">${pizzaJSON[0].name}</p>
+  <p id="pizzaDetails">Detalii Pizza</p>
+  <p id="pizzaPrice">35,00 lei</p>
+  </div>`)
+  const pizzas = document.querySelector("#pizza")
+  console.log(pizzas)
+  allAllergens.insertAdjacentHTML("beforeend", `<div id="allergen">${allergensJSON[0].name}</div> 
+  <label class="container">
+  <input checked="checked" type="checkbox">
+  <div class="checkmark"></div>
+</label> `)
+
+  filterBtn.addEventListener("click", (e) => {
+    console.log(allAllergens.style.visibility)
+    if(allAllergens.style.visibility == "visible"){
+      allAllergens.style.transition = "height 0s"
+      allAllergens.style.visibility = "hidden"
+      allAllergens.style.height = "5vh"
+      pizzas.style.marginLeft = "200px"
 
 
-
+    } else {
+      allAllergens.style.transition = "height 3s"
+      allAllergens.style.visibility = "visible"
+      allAllergens.style.height = "100vh"
+      pizzas.style.marginLeft = "400px"
+    }
+  })
 }
 
 const loadEvent = () => {

@@ -1,34 +1,171 @@
-body {
-    background-color: rgb(180, 50, 50);
+/* body {
+    background: rgb(227, 59, 59);
+    background: linear-gradient(90deg, rgba(227, 59, 59, 1) 0%, rgba(255, 197, 115, 1) 50%, rgba(247, 131, 21, 1) 100%);
+} */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
 
-.button {
-    background-color: #333;
-    color: #fff;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    font-size: 17px;
+.container {
+  display: flex;
+  gap: 10px;
 }
 
-.button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    background-color: rgb(128, 95, 247);
+.checkmark {
+  position: relative;
+  box-shadow: rgb(255, 84, 0) 0px 0px 0px 2px;
+  background-color: rgba(16, 16, 16, 0.5);
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  flex-shrink: 0;
+  margin-top: -1px;
+  transition: all 0.2s ease 0s;
+  cursor: pointer;
+  transform-origin: 0px 10px;
+  border-radius: 4px;
+  margin: -1px 10px 0px 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-.button:active {
-    transform: translateY(0.5em);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+.container input:checked~.checkmark {
+  box-shadow: rgb(255, 84, 0) 0px 0px 0px 2px;
+  background-color: rgba(245, 24, 24, 0.5);
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  flex-shrink: 0;
+  margin-top: -1px;
+  transition: all 0.2s ease 0s;
+  cursor: pointer;
+  transform-origin: 0px 10px;
+  border-radius: 4px;
+  margin: -1px 10px 0px 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-.Mushrooms{
-    background-color: rgb(4, 238, 70);
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
 }
 
-.hidden {
-    display: none;
+.container input:checked~.checkmark:after {
+  display: block;
+}
+
+
+
+#pizzaJSON {
+  margin-top: 100px;
+}
+
+#pizza {
+  padding: 20px;
+  width: 400px;
+  height: 300px;
+  /* border-radius: 25px; */
+  border: 2px solid gray;
+  box-shadow: 5px 10px 18px rgb(85, 84, 84);
+  margin-left: 200px;
+  background-color: white;
+  transition: margin-left 3s;
+  /* text-align: right;
+  text-align-last: center; */
+}
+
+#pizzaName{
+  text-align: center;
+  color: orangered;
+}
+
+#pizzaDetails{
+  padding-left: 200px;
+  text-align-last: left;
+}
+
+#pizzaPrice{
+  text-align: right;
+  color: orangered;
+}
+
+.btn {
+  margin-top: 12px;
+  margin-right: 5px;
+
+}
+
+.container .checkmark:after {
+  left: 0.45em;
+  top: 0.25em;
+  width: 0.25em;
+  height: 12px;
+  border: solid white;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+  transition: all 500ms ease-in-out;
+}
+
+.searchBar {
+  position: fixed;
+  background-color: orangered;
+  margin-top: 0;
+  height: 70px;
+  width: 100%
+}
+
+
+
+.allergens {
+  background-color: yellow;
+  /* width: 300px;
+  height: 900px;
+  display: block;
+  position: relative; */
+  /* width: 50px;
+  height: 100px;
+  transform: rotate(90deg); */
+  width: 300px; 
+  height: 5vh; 
+  writing-mode:horizontal-tb;
+  display: block; 
+  position: fixed;
+  transition: height 4s;
+  transition-timing-function: ease-out;
+  visibility: hidden;
+  
+  /* text-orientation: upright; */
+    
+}
+/* .allergens:hover{
+  height: 100vh;
+} */
+@keyframes hover {
+  from {
+    height: 5vh;
+  }
+  to {
+    height: 100vh;
+  }
+}
+
+#root {
+  padding-top: 70px;
+  background-color: rgb(232, 227, 227);
+}
+label{
+  position: absolute;
+  left: 250px;
+  top: 25px;
+}
+#allergen{
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 15px;
 }
