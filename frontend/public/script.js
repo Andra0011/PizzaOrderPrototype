@@ -48,46 +48,15 @@ const formular = () => {
 </div>`
 }
 
-let subtotal = 0
-const sumary = () => {
+const baseSumary = () => {
   return `<div class="modal-dialog orderForm" id = "orderDetailsContainer">
   <div class="modal-content receipt">
     <div class="modal-header">
       <h4 class="modal-title">Order List</h4>
     </div>
-
     <div class="modal-body">
-      <div class="modal-body text-start text-black p-4">
-      <div id="orderList">
-      </div>
-      <p class="mb-0" style="color: #35558a;">Payment summary</p>
-      <hr class="mt-2 mb-4"
-        style="height: 0; width: 500px; background-color: transparent; opacity: .75; border-top: 2px dashed #9e9e9e;">
-
-      <div class="d-flex justify-content-between">
-        <p class="fw-bold mb-0">Subtotal</p>
-        <p id="subtotal" class="text-muted mb-0">${subtotal} RON</p>
-      </div>
-
-      <div class="d-flex justify-content-between">
-        <p class="small mb-0">Delivery</p>
-        <p class="small mb-0">30 RON</p>
-      </div>
-
-      <div class="d-flex justify-content-between pb-1">
-        <p class="small">Tax</p>
-        <p class="small">40 RON</p>
-      </div>
-
-      <div class="d-flex justify-content-between">
-        <p class="fw-bold">Total</p>
-        <p id="total" class="fw-bold" style="color: #35558a;">${subtotal + 70} RON</p>
-      </div>
-
     </div>
-
     </div>
-
   </div>
 </div>`
 }
@@ -195,8 +164,8 @@ const loadAPI = async () => {
     const pizzaPrice = document.querySelector(`#pizzaPrice${pizza.id}`);
     pizzaPrice.textContent = `${pizza.price} RON`
 
-    const amount = addEl("input", thatPizza, "id", `amount${pizza.id}`, "class", "amountInput");
-    amount.value = "0";
+    const amount = addEl("input", thatPizza, "id", `amount${pizza.id}`,"class", "amountInput");
+    amount.placeholder = "0";
 
     const addButton = addEl("button", thatPizza, "data-pizza-id", `${pizza.id}`, "class", "add orderBttn");
     addButton.textContent = "Add to order";
@@ -231,8 +200,7 @@ const loadAPI = async () => {
   root.insertAdjacentHTML("beforeend", `<div class= "popup"></div>`)
   let popup = document.querySelector(".popup")
   popup.insertAdjacentHTML("beforeend", formular())
-  popup.insertAdjacentHTML("beforeend", sumary())
-  let orderPopUp = document.querySelector(".orderForm")
+  popup.insertAdjacentHTML("beforeend", baseSumary())
 
   let cancelBtn = addEl("button", popup, "class", "cancelBtn")
   cancelBtn.innerHTML = "x"
@@ -266,33 +234,40 @@ const handleAddToOrder = (event) => {
   const pizzaId = event.target.getAttribute("data-pizza-id");
   const amount = document.getElementById(`amount${pizzaId}`);
 
-  if (amount.value == 0) {
+  if (Math.floor(amount.value) <= 0) {
     return;
   }
 
   cart.push({
     id: pizzaId,
-    amount: amount.value,
+    amount: Math.floor(amount.value),
   })
-  console.log(cart);
 
   event.target.style.display = 'none';
   document.querySelector(`.remove[data-pizza-id='${pizzaId}']`).style.display = "";
   amount.disabled = true;
+
+  const sumaryArea = document.querySelector("#orderDetailsContainer .modal-body")
+  sumaryArea.innerHTML = "";
+  sumaryArea.innerHTML = buildSumary();
 }
 
 const handleRemoveFromOrder = (event) => {
   const pizzaId = event.target.getAttribute("data-pizza-id");
   cart = cart.filter(pizza => pizza.id !== pizzaId);
-  console.log(cart);
 
   event.target.style.display = 'none';
   document.querySelector(`.add[data-pizza-id='${pizzaId}']`).style.display = "";
-  document.getElementById(`amount${pizzaId}`).disabled = false;
+  const amount = document.getElementById(`amount${pizzaId}`)
+  amount.disabled = false;
+  amount.value = "";
+
+  const sumaryArea = document.querySelector("#orderDetailsContainer .modal-body")
+  sumaryArea.innerHTML = "";
+  sumaryArea.innerHTML = buildSumary();
 }
 
 const submitOrder = (event) => {
-  // Get values
   const name = document.getElementById("name");
   const email = document.getElementById("email");
   const city = document.getElementById("city");
@@ -334,4 +309,51 @@ const submitOrder = (event) => {
 
   event.preventDefault();
   location.reload();
+}
+
+const buildSumary = () => {
+  let subtotal = 0;
+  let sumary = `
+    <div class="modal-body text-start text-black p-4">
+      <div id="orderList">
+      </div>
+      <p class="mb-0" style="color: #35558a;">Payment summary</p>
+      <hr class="mt-2 mb-4"
+        style="height: 0; width: 500px; background-color: transparent; opacity: .75; border-top: 2px dashed #9e9e9e;">
+  `;
+
+  cart.forEach(cartItem => {
+    const pizza = pizzaJSON.find(pizza => pizza.id == cartItem.id);
+    const price = cartItem.amount*pizza.price;
+    sumary += `
+      <div class="d-flex justify-content-between">
+        <p class="small mb-0">${cartItem.amount} X ${pizza.name}</p>
+        <p class="small mb-0">${price} RON</p>
+      </div>
+    `;
+    subtotal += price;
+  });
+  sumary += `
+      <div class="d-flex justify-content-between">
+        <p class="fw-bold mb-0">Subtotal</p>
+        <p id="subtotal" class="text-muted mb-0">${subtotal} RON</p>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <p class="small mb-0">Delivery</p>
+        <p class="small mb-0">30 RON</p>
+      </div>
+
+      <div class="d-flex justify-content-between pb-1">
+        <p class="small">Tax</p>
+        <p class="small">40 RON</p>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <p class="fw-bold">Total</p>
+        <p id="total" class="fw-bold" style="color: #35558a;">${subtotal + 70} RON</p>
+      </div>
+  `
+
+  return sumary;
 }
