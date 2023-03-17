@@ -234,7 +234,7 @@ const handleAddToOrder = (event) => {
   const pizzaId = event.target.getAttribute("data-pizza-id");
   const amount = document.getElementById(`amount${pizzaId}`);
 
-  if (Math.floor(amount.value) <= 0) {
+  if (Math.floor(amount.value) <= 0 || isNaN(amount.value)) {
     return;
   }
 
