@@ -63,7 +63,7 @@ img {
 }
 
 .searchBar {
-  position: fixed;
+  position: absolute;
   background: rgb(227, 59, 59);
   background: linear-gradient(90deg, rgba(227, 59, 59, 1) 0%, rgba(255, 197, 115, 1) 50%, rgba(247, 131, 21, 1) 100%);
   margin-top: 0;
