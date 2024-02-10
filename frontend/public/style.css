@@ -4,10 +4,11 @@ body {
 
 #pizzaJSON {
   margin-top: 100px;
-  display: grid;
-  grid-template-columns: auto auto auto;
+  display: flex;
+  flex-wrap: wrap;
+  /* grid-template-columns: auto auto auto; */
   transition: margin-left 3s;
-  margin-left: 0;
+  justify-content: center;
 }
 
 .pizza {
@@ -21,6 +22,7 @@ body {
   margin-left: 100px;
   background-color: white;
   margin-block: 20px;
+
 }
 
 /* .pizza {
@@ -70,6 +72,7 @@ img {
   height: 70px;
   width: 100%;
   border-radius: 5px 5px 0 0 ;
+  z-index: 1;
 }
 
 
@@ -95,6 +98,7 @@ img {
   font-family: "Helvetica Neue", "Arial", sans-serif;
   color: white;
   border-radius: 0 5px 0 5px;
+  z-index: 1;
 
   /* text-orientation: upright; */
 }
@@ -250,13 +254,62 @@ label {
   font-weight: 800;
   height: auto;
   width: 35px;
-  font-size: 25px;
+  top: 25%;
+  position: absolute;
+  left: 7%;
   /* margin-left: 60px;
   margin-top: 20px; */
 }
 .amountInput {
   position: absolute;
   top: 70%;
-  left :67%;
+  left :80%;
+  inline-size: 55px;
   /* margin-left: 380px; */
 }
+
+.submitPopup{
+  width: 400px;
+  background: #e6e5e5;
+  border-radius: 6px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: #333;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+  z-index: 1;
+}
+
+.open-popup{
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+
+.submitPopup h2{
+  font-size: 38px;
+  font-weight: 500;
+  margin: 30px 0 10px;
+}
+
+.submitPopup button{
+  width: 100%;
+  margin-top: 50px;
+  padding: 10px 0;
+  background: #ef6902;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+

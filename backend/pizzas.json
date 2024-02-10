@@ -3,7 +3,7 @@
         {
             "id": 1,
             "name": "Pizza Prosciutto e Funghi",
-            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-prosciutto-e-funghi.jpg",
+            "image": "https://prd-images.trentapizza.ro/Products/Original/Prosciutto_Funghi_-_Homepage_B-3233.jpg",
             "ingredients": [
                 "mozzarella",
                 "tomato sauce",
@@ -21,7 +21,7 @@
         {
             "id": 2,
             "name": "Pizza Margherita",
-            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-margherita.jpg",
+            "image": "https://prd-images.trentapizza.ro/Products/Original/Pizza_Baza_-_Meniu-3595.jpg",
             "ingredients": [
                 "tomato sauce",
                 "mozzarella",
@@ -36,7 +36,7 @@
         {
             "id": 3,
             "name": "Pizza Diavola",
-            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-diavola.jpg",
+            "image": "https://prd-images.trentapizza.ro/Products/Original/Diavola_-_Meniu-3499.jpg",
             "ingredients": [
                 "mozzarella",
                 "tomato sauce",
@@ -52,7 +52,7 @@
         {
             "id": 4,
             "name": "Pizza Capriciosa",
-            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-capriciosa.jpg",
+            "image": "https://prd-images.trentapizza.ro/Products/Original/Capricciosa_-_Meniu-3500.jpg",
             "ingredients": [
                 "mozzarella",
                 "tomato sauce",
@@ -73,7 +73,7 @@
         {
             "id": 5,
             "name": "Pizza Quattro Stagioni",
-            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-quattro-stagioni.jpg",
+            "image": "https://prd-images.trentapizza.ro/Products/Original/Quattro_Stagioni_-_Meniu-3490.jpg",
             "ingredients": [
                 "mozzarella",
                 "tomato sauce",
@@ -93,7 +93,7 @@
         {
             "id": 6,
             "name": "Pizza Quattro Formaggi",
-            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-quattro-stagioni.jpg",
+            "image": "https://prd-images.trentapizza.ro/Products/Original/Quattro_Formaggi_-_Meniu-3496.jpg",
             "ingredients": [
                 "mozzarella",
                 "smoked cheese",
@@ -108,29 +108,30 @@
         },
         {
             "id": 7,
-            "name": "Pizza Campagnola",
-            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-campagnola.jpg",
+            "name": "BBQ Salsiccia",
+            "image": "https://prd-images.trentapizza.ro/Products/Original/Pizza_BBQ_Salsiccia-4160.jpg",
             "ingredients": [
                 "mozzarella",
                 "tomato sauce",
-                "red onion",
-                "bell pepper",
-                "eggplant",
                 "corn",
-                "black olives"
+                "red onion",
+                "bacon",
+                "sausage"
             ],
             "price": 45,
             "allergens": [
                 1,
                 3,
+                4,
                 7,
+                8,
                 9
             ]
         },
         {
             "id": 8,
             "name": "Pizza Carnivora",
-            "image": "https://www.fabiopizza.ro/upload/shop/products/pizza-carnivora.jpg",
+            "image": "https://prd-images.trentapizza.ro/Products/Original/Carnivora_-_Meniu-3488.jpg",
             "ingredients": [
                 "mozzarella",
                 "tomato sauce",

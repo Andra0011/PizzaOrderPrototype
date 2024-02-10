@@ -47,6 +47,8 @@ const formular = () => {
 
 </div>`
 }
+ 
+
 
 const baseSumary = () => {
   return `<div class="modal-dialog orderForm" id = "orderDetailsContainer">
@@ -164,8 +166,17 @@ const loadAPI = async () => {
     const pizzaPrice = document.querySelector(`#pizzaPrice${pizza.id}`);
     pizzaPrice.textContent = `${pizza.price} RON`
 
+    // const minusBtn = addEl("button", thatPizza, "id", "minus" )
+    // minusBtn.textContent = "-"
+
     const amount = addEl("input", thatPizza, "id", `amount${pizza.id}`,"class", "amountInput");
-    amount.placeholder = "0";
+    amount.type = "number";
+    amount.min = "1";
+    amount.value = "1";
+  
+
+    // const plusBtn = addEl("button", thatPizza, "id", "plus" )
+    // plusBtn.textContent = "+"
 
     const addButton = addEl("button", thatPizza, "data-pizza-id", `${pizza.id}`, "class", "add orderBttn");
     addButton.textContent = "Add to order";
@@ -260,7 +271,7 @@ const handleRemoveFromOrder = (event) => {
   document.querySelector(`.add[data-pizza-id='${pizzaId}']`).style.display = "";
   const amount = document.getElementById(`amount${pizzaId}`)
   amount.disabled = false;
-  amount.value = "";
+  amount.value = "1";
 
   const sumaryArea = document.querySelector("#orderDetailsContainer .modal-body")
   sumaryArea.innerHTML = "";
@@ -272,6 +283,8 @@ const submitOrder = (event) => {
   const email = document.getElementById("email");
   const city = document.getElementById("city");
   const street = document.getElementById("street");
+  let submitPopup = document.getElementById("submitPopup")
+
 
   if (name.value === '' || email.value === '' || city.value === '' || street.value === '') {
     event.preventDefault();
@@ -279,6 +292,15 @@ const submitOrder = (event) => {
   }
 
   const dateNow = new Date();
+
+  let total = 0
+  cart.forEach(cartItem => {
+    const pizza = pizzaJSON.find(pizza => pizza.id == cartItem.id);
+    const price = cartItem.amount*pizza.price;
+    
+    total += price;
+    total += 70;
+  }); 
 
   const order = {
     pizzas: cart,
@@ -295,8 +317,10 @@ const submitOrder = (event) => {
       address: {
         city: city.value,
         street: street.value,
+        
       }
-    }
+    },
+    price: total
   }
 
   fetch("/api/order", {
@@ -308,7 +332,16 @@ const submitOrder = (event) => {
   });
 
   event.preventDefault();
+  submitPopup.classList.add("open-popup")
+
+}
+
+let submitPopup = document.getElementById("submitPopup")
+
+function closeSubmitPopup(){
+  submitPopup.classList.remove("open-popup")
   location.reload();
+
 }
 
 const buildSumary = () => {
@@ -357,3 +390,22 @@ const buildSumary = () => {
 
   return sumary;
 }
+// function submitForm() {
+  
+
+//   // Send data to the server for processing
+//   fetch('/order', {
+//       method: 'POST',
+//       headers: {
+//           'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(order),
+//   })
+//   .then(response => response.json())
+//   .then(data => {
+//       console.log('Success:', data);
+//   })
+//   .catch((error) => {
+//       console.error('Error:', error);
+//   });
+// }
