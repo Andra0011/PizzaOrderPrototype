@@ -9,7 +9,7 @@ const Order = require("./model/Order.js");
 const Pizza = require("./model/Pizza.js");
 
 mongoose.connect(
-  "mongodb+srv://capraruandra:2NTuBkERNdp4Y7jL@pizza.rf3veqr.mongodb.net/"
+  
 );
 
 const db = mongoose.connection;
