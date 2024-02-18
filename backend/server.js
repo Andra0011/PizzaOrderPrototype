@@ -4,15 +4,15 @@ const fileReaderAsync = require("./fileReader");
 const fileWriterAsync = require("./fileWriter");
 const pizzaPath = path.join(`${__dirname}/pizzas.json`);
 const allergenPath = path.join(`${__dirname}/allergens.json`);
-const mongoose = require("mongoose");
-const Order = require("./model/Order.js");
-const Pizza = require("./model/Pizza.js");
+// const mongoose = require("mongoose");
+// const Order = require("./model/Order.js");
+// const Pizza = require("./model/Pizza.js");
 
-mongoose.connect(
+// mongoose.connect(
   
-);
+// );
 
-const db = mongoose.connection;
+// const db = mongoose.connection;
 // const collection = db.collection("orders");
 
 const app = express();
@@ -23,9 +23,9 @@ app.use(express.urlencoded({ extended: false }));
 const port = 9001;
 const orders = [];
 
-Pizza.create({
-  name: ["Diavola", "Margherita"],
-});
+// Pizza.create({
+//   name: ["Diavola", "Margherita"],
+// });
 
 // app.post('/order', (req, res) => {
 //     const order = req.body;

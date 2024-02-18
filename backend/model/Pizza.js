@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
-const { Schema, model} = mongoose;
+// const mongoose = require('mongoose');
+// const { Schema, model} = mongoose;
 
-const pizzaSchema = new Schema ({
-    name: [String]
-});
+// const pizzaSchema = new Schema ({
+//     name: [String]
+// });
 
-const Pizza = model('Pizza', pizzaSchema);
+// const Pizza = model('Pizza', pizzaSchema);
 
-module.exports = Pizza;
+// module.exports = Pizza;
